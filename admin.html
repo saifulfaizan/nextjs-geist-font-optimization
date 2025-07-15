@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel Patched</title>
+</head>
+<body>
+  <!-- Contoh Bahagian New Order -->
+  <section id="new-order-section">
+    <h2>Buat Tempahan</h2>
+
+    <!-- PATCHED: Pilih Model Kereta + Cadangan Bateri -->
+    <div class="mt-6">
+      <label class="block text-gray-700 mb-2">Pilih Model Kereta</label>
+      <select id="car-model" class="w-full px-3 py-2 border rounded-lg">
+        <option value="">-- Pilih Kereta --</option>
+        <option value="axia">Perodua Axia</option>
+        <option value="myvi">Perodua Myvi</option>
+        <option value="saga">Proton Saga</option>
+        <option value="wira">Proton Wira</option>
+        <option value="exora">Proton Exora</option>
+        <option value="x70">Proton X70</option>
+        <option value="vios">Toyota Vios</option>
+        <option value="civic">Honda Civic</option>
+        <option value="crv">Honda CR-V</option>
+        <option value="bmw320">BMW 320i</option>
+        <option value="bmw520">BMW 5 Series</option>
+        <option value="mercC">Mercedes C-Class</option>
+        <option value="mercE">Mercedes E-Class</option>
+        <option value="mercS">Mercedes S-Class</option>
+      </select>
+      <p id="suggested-battery" class="mt-2 text-blue-700 font-medium">Bateri cadangan: -</p>
+    </div>
+  </section>
+
+  <!-- SCRIPT PATCHED -->
+  <script>
+    const batteryGuide = {
+      axia: { model: "NS40ZL", price: "RM180 - RM220" },
+      myvi: { model: "NS60S", price: "RM220 - RM280" },
+      saga: { model: "NS60S", price: "RM220 - RM280" },
+      wira: { model: "N50", price: "RM230 - RM300" },
+      exora: { model: "NS70", price: "RM280 - RM380" },
+      x70: { model: "DIN55 AGM", price: "RM450 - RM650" },
+      vios: { model: "NS60L", price: "RM220 - RM280" },
+      civic: { model: "DIN55 AGM", price: "RM450 - RM650" },
+      crv: { model: "DIN66", price: "RM350 - RM500" },
+      bmw320: { model: "DIN66", price: "RM350 - RM500" },
+      bmw520: { model: "DIN74", price: "RM500 - RM700" },
+      mercC: { model: "DIN66 AGM", price: "RM550 - RM750" },
+      mercE: { model: "DIN74 AGM", price: "RM550 - RM800" },
+      mercS: { model: "DIN88 AGM", price: "RM700 - RM1000" }
+    };
+
+    document.getElementById("car-model").addEventListener("change", function() {
+      const selected = this.value;
+      const output = document.getElementById("suggested-battery");
+      if (batteryGuide[selected]) {
+        output.innerText = `Bateri: ${batteryGuide[selected].model} (${batteryGuide[selected].price})`;
+      } else {
+        output.innerText = "Bateri cadangan: -";
+      }
+    });
+  </script>
+</body>
+</html>
